@@ -13,9 +13,9 @@ import {DonePipe} from './done.pipe';
   directives: [TaskComponent, EditTaskDetailsComponent, NewTaskComponent],
   template: `
   <select (change)="onChange($event.target.value)" class="filter">
-    <option value="all">Show All</option>
+    <option value="all" selected>Show All</option>
     <option value="done">Show Done</option>
-    <option value="notDone" selected="selected">Show Not Done</option>
+    <option value="notDone">Show Not Done</option>
   </select>
   <task-display *ngFor="#currentTask of taskList | done:filterDone"
     (click)="taskClicked(currentTask)"
@@ -39,10 +39,9 @@ export class TaskListComponent {
     this.selectedTask = clickedTask;
     this.onTaskSelect.emit(clickedTask);
   }
-  createTask(description: string): void {
-    this.taskList.push(
-      new Task(description, this.taskList.length)
-    );
+  createTask(newTask: Task): void {
+    newTask.id = this.taskList.length;
+    this.taskList.push(newTask);
   }
   onChange(filterOption) {
     this.filterDone = filterOption;
