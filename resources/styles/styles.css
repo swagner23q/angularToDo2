@@ -5,3 +5,15 @@ h1 {
 .selected {
   color: #22bdf0;
 }
+
+.task-form {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.add-button {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
