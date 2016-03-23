@@ -17,7 +17,6 @@ import {Task} from './task.model';
     </div>
     `
 })
-
 export class NewTaskComponent {
   public onSubmitNewTask: EventEmitter<Task>;
   constructor(){

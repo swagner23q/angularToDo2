@@ -3,8 +3,8 @@ import { TaskComponent } from './task.component';
 import { Task } from './task.model';
 import { EditTaskDetailsComponent } from './edit-task-details.component';
 import { NewTaskComponent } from './new-task.component';
-import { DonePipe } from './done.pipe';
-import { PriorityPipe } from './priority.pipe';
+import { DonePipe } from './pipe.done';
+import { PriorityPipe } from './pipe.priority';
 
 @Component({
   selector: 'task-list',
