@@ -38,7 +38,7 @@ export class TaskListComponent {
   public onTaskSelect: EventEmitter<Task>;
   public selectedTask: Task;
   public filterDone: string = "notDone";
-  public filterPriority: string = "high";
+  public filterPriority: string = "low";
   constructor() {
     this.onTaskSelect = new EventEmitter();
   }
