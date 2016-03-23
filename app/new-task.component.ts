@@ -3,6 +3,7 @@ import {Task} from './task.model';
 
 @Component({
   selector: 'new-task',
+  inputs: ['categoryList'],
   outputs: ['onSubmitNewTask'],
   template:`
     <div class="task-form">
@@ -12,12 +13,8 @@ import {Task} from './task.model';
       <option value="low" selected>low</option>
       <option value="medium">medium</option>
       <option value="high">high</option>
-      </select>
-      <select #newCategory>
-        <option value="work" selected>Work</option>
-        <option value="home">Home</option>
-        <option value="hobby">Hobby</option>
-        </select>
+    </select>
+    <input placeholder="Category" class="col-sm-8 input-lg" #newCategory>
     <button (click)="addTask(newDescription, newPriority, newCategory)" class="btn-success btn-lg add-button">Add</button>
     </div>
     `
@@ -32,6 +29,6 @@ export class NewTaskComponent {
     this.onSubmitNewTask.emit(newTask);
     userDescription.value = "";
     userPriority.value = "low";
-    userCategory.value = "work";
+    userCategory.value = "";
   }
 }

@@ -6,10 +6,11 @@ import { NewTaskComponent } from './new-task.component';
 import { DonePipe } from './pipe.done';
 import { PriorityPipe } from './pipe.priority';
 import { CategoryPipe } from './pipe.category';
+import { Category } from './category.model';
 
 @Component({
   selector: 'task-list',
-  inputs: ['taskList'],
+  inputs: ['taskList','categories'],
   outputs: ['onTaskSelect'],
   pipes: [DonePipe, PriorityPipe, CategoryPipe],
   directives: [TaskComponent, EditTaskDetailsComponent, NewTaskComponent],
@@ -25,9 +26,8 @@ import { CategoryPipe } from './pipe.category';
     <option value="high">high</option>
   </select>
   <select (change)="onChangeCategory($event.target.value)" class="filter">
-    <option value="work" selected>Work</option>
-    <option value="home">Home</option>
-    <option value="hobby">Hobby</option>
+    <option selected>Sort by category</option>
+    <option *ngFor="#category of categories" value={{category.name}}>{{category.name}}</option>
   </select>
   <task-display *ngFor="#currentTask of taskList | done:filterDone | priority:filterPriority | category:filterCategory"
     (click)="taskClicked(currentTask)"
@@ -45,10 +45,17 @@ export class TaskListComponent {
   public selectedTask: Task;
   public filterDone: string = "notDone";
   public filterPriority: string = "low";
-  public filterCategory: string = "work";
+  public filterCategory: string;
+  public categories: Category[];
   constructor() {
     this.onTaskSelect = new EventEmitter();
+    this.categories = [
+      new Category("home"),
+      new Category("work"),
+      new Category("hobby")
+    ];
   }
+
   taskClicked(clickedTask: Task): void {
     this.selectedTask = clickedTask;
     this.onTaskSelect.emit(clickedTask);
@@ -56,6 +63,8 @@ export class TaskListComponent {
   createTask(newTask: Task): void {
     newTask.id = this.taskList.length;
     this.taskList.push(newTask);
+    var newCategory = new Category(newTask.category);
+    this.categories.push(newCategory);
   }
   onChangeDone(filterOption) {
     this.filterDone = filterOption;
