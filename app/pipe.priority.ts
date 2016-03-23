@@ -11,15 +11,15 @@ export class PriorityPipe implements PipeTransform {
   var desiredPriorityState = args[0];
   if(desiredPriorityState === "high"){
     return input.filter((task) => {
-        return task.priority === "high"
+        return task.priority === "high";
     });
   } else if (desiredPriorityState === "medium"){
     return input.filter((task) => {
-      return task.priority === "medium"
+      return task.priority === "medium";
     });
   } else if (desiredPriorityState === "low"){
     return input.filter((task) => {
-      return task.priority === "low"
+      return task.priority === "low";
     });
   } else {
     return input;

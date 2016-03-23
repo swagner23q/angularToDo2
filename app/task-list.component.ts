@@ -5,12 +5,13 @@ import { EditTaskDetailsComponent } from './edit-task-details.component';
 import { NewTaskComponent } from './new-task.component';
 import { DonePipe } from './pipe.done';
 import { PriorityPipe } from './pipe.priority';
+import { CategoryPipe } from './pipe.category';
 
 @Component({
   selector: 'task-list',
   inputs: ['taskList'],
   outputs: ['onTaskSelect'],
-  pipes: [DonePipe, PriorityPipe],
+  pipes: [DonePipe, PriorityPipe, CategoryPipe],
   directives: [TaskComponent, EditTaskDetailsComponent, NewTaskComponent],
   template: `
   <select (change)="onChangeDone($event.target.value)" class="filter">
@@ -23,7 +24,12 @@ import { PriorityPipe } from './pipe.priority';
     <option value="medium">medium</option>
     <option value="high">high</option>
   </select>
-  <task-display *ngFor="#currentTask of taskList | done:filterDone | priority:filterPriority"
+  <select (change)="onChangeCategory($event.target.value)" class="filter">
+    <option value="work" selected>Work</option>
+    <option value="home">Home</option>
+    <option value="hobby">Hobby</option>
+  </select>
+  <task-display *ngFor="#currentTask of taskList | done:filterDone | priority:filterPriority | category:filterCategory"
     (click)="taskClicked(currentTask)"
     [class.selected]="currentTask === selectedTask"
     [task]="currentTask">
@@ -39,6 +45,7 @@ export class TaskListComponent {
   public selectedTask: Task;
   public filterDone: string = "notDone";
   public filterPriority: string = "low";
+  public filterCategory: string = "work";
   constructor() {
     this.onTaskSelect = new EventEmitter();
   }
@@ -55,5 +62,8 @@ export class TaskListComponent {
   }
   onChangePriority(filterOption) {
     this.filterPriority = filterOption;
+  }
+  onChangeCategory(filterOption) {
+    this.filterCategory = filterOption;
   }
 }
