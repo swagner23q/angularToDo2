@@ -6,7 +6,7 @@ import { NewTaskComponent } from './new-task.component';
 import { DonePipe } from './pipe.done';
 import { PriorityPipe } from './pipe.priority';
 import { CategoryPipe } from './pipe.category';
-import { Category } from './category.model';
+
 
 @Component({
   selector: 'task-list',
@@ -27,7 +27,7 @@ import { Category } from './category.model';
   </select>
   <select (change)="onChangeCategory($event.target.value)" class="filter">
     <option selected>Sort by category</option>
-    <option *ngFor="#category of categories" value={{category.name}}>{{category.name}}</option>
+    <option *ngFor="#category of categories" value={{category}}>{{category}}</option>
   </select>
   <task-display *ngFor="#currentTask of taskList | done:filterDone | priority:filterPriority | category:filterCategory"
     (click)="taskClicked(currentTask)"
@@ -46,13 +46,13 @@ export class TaskListComponent {
   public filterDone: string = "notDone";
   public filterPriority: string = "low";
   public filterCategory: string;
-  public categories: Category[];
+  public categories: string[];
   constructor() {
     this.onTaskSelect = new EventEmitter();
     this.categories = [
-      new Category("home"),
-      new Category("work"),
-      new Category("hobby")
+      "home",
+      "work",
+      "hobby"
     ];
   }
 
@@ -63,8 +63,7 @@ export class TaskListComponent {
   createTask(newTask: Task): void {
     newTask.id = this.taskList.length;
     this.taskList.push(newTask);
-    var newCategory = new Category(newTask.category);
-    this.categories.push(newCategory);
+    this.categories.push(newTask.category);
   }
   onChangeDone(filterOption) {
     this.filterDone = filterOption;

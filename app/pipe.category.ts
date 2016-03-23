@@ -13,27 +13,3 @@ export class CategoryPipe implements PipeTransform {
         });
     }
   }
-
-
-
-
-
-//   transform(input: Task[], args) {
-//     var desiredCategoryState = args[0];
-//     if(desiredCategoryState === "work") {
-//       return input.filter((task) => {
-//         return task.category === "work";
-//       });
-//     } else if (desiredCategoryState === "home") {
-//       return input.filter((task) => {
-//         return task.category === "home";
-//       });
-//     } else if (desiredCategoryState === "hobby") {
-//       return input.filter((task) => {
-//         return task.category === "hobby";
-//       });
-//     } else {
-//       return input;
-//     }
-//   }
-// }
