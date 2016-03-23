@@ -46,7 +46,7 @@ export class TaskListComponent {
   public filterDone: string = "notDone";
   public filterPriority: string = "low";
   public filterCategory: string;
-  public categories: string[];
+  public categories;
   constructor() {
     this.onTaskSelect = new EventEmitter();
     this.categories = [
@@ -55,7 +55,6 @@ export class TaskListComponent {
       "hobby"
     ];
   }
-
   taskClicked(clickedTask: Task): void {
     this.selectedTask = clickedTask;
     this.onTaskSelect.emit(clickedTask);
@@ -63,7 +62,12 @@ export class TaskListComponent {
   createTask(newTask: Task): void {
     newTask.id = this.taskList.length;
     this.taskList.push(newTask);
-    this.categories.push(newTask.category);
+    if(this.categories.includes(newTask.category)) {
+      console.log("Warning: Duplicate category, nothing added to category list.");
+    } else {
+      console.log("New category added to category list!");
+      this.categories.push(newTask.category);
+    }
   }
   onChangeDone(filterOption) {
     this.filterDone = filterOption;
