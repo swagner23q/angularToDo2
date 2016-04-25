@@ -9,11 +9,15 @@ This application is a demonstration of use of Angular 2. It is a simple app that
 
 Install addressBook by cloning this repository.
 
+Within terminal: 
+
 Run npm install
 
 Run bower install
 
-run gulpwatch
+Run gulp build
+
+Run gulp serve
 
 ## Technologies Used
 
